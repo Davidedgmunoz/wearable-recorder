@@ -8,8 +8,12 @@ import Testing
 
 @testable import RecordingFeature
 
+/// Baselines are pinned to the machine that recorded them: hosted CI runners render
+/// fonts slightly differently, so these only run where the baseline lives (locally,
+/// or on a self-hosted runner with the same image).
 @MainActor
-@Suite struct LinkStatusSnapshotTests {
+@Suite(.disabled(if: ProcessInfo.processInfo.environment["CI"] == "true", "Snapshot baselines are pinned to the recording machine"))
+struct LinkStatusSnapshotTests {
   let device = DiscoveredDevice(id: UUID(1), name: "Headset", rssi: -50)
 
   var recording: Recording {

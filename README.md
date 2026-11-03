@@ -73,10 +73,11 @@ swift test
 - Snapshots of the link status card (standby, recording, reconnecting), with baselines
   per platform.
 
-CI runs the same command on GitHub Actions (`.github/workflows/ci.yml`). Snapshot
-baselines depend on the OS's font rendering, so they're pinned to the machine that
-recorded them. Re-record with `SNAPSHOT_TESTING_RECORD=all swift test` if the runner image
-changes.
+CI runs the same command on GitHub Actions (`.github/workflows/ci.yml`), plus an iOS
+Simulator build. Snapshot baselines depend on the OS's font rendering, so they're pinned
+to the machine that recorded them and skipped on hosted runners (`CI=true`). A
+self-hosted Mac runner with the same image could run them too. Re-record with
+`SNAPSHOT_TESTING_RECORD=all swift test`.
 
 ## Running it
 
